@@ -15,8 +15,7 @@ import twitter from '../assets/twitter1.png';
 import linkedin from '../assets/linkedin1.png';
 import copy from '../assets/copyright.png';
 import {Link } from 'react-router-dom';
-
-import handleSubscribe from '../props/handleSubscribe';
+import emailjs from 'emailjs-com';
 
 
 function NavBar() {
@@ -24,9 +23,16 @@ function NavBar() {
 
   const handleSubscription = (e) => {
     e.preventDefault();
-    const email = 'ayowilfred1995@gmail.com'; 
-    handleSubscribe(email);
+
+    emailjs.send('service_1piol4r', 'template_5qfnuxb',{ email },'kJfEMWargoxfroGaR')
+      .then((response) => {
+        console.log('Email sent successfully!', response.status, response.text);
+      })
+      .catch((error) => {
+        console.error('Error sending email:', error);
+      });
     setEmail('');
+    alert('Email sent successully');
   };
 
   const handleChange = (event) => {
